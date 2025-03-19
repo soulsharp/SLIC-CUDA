@@ -16,14 +16,16 @@ if __name__ == "__main__":
   # Please put input image in the results/ images dir
   parser.add_argument("--image_path", type=str, help="Path of the image to be SLIC-ed")
   
-  # Number of superpixels and normalizing factor to be used in the image
+  # Number of superpixels, number of iterations and normalizing factor to be used in the image
   parser.add_argument("--num_superpixels", type=int, help="Number of superpixels in the image", default=150)
+  parser.add_argument("--num_iterations", type=int, help="Number of iterations to run SLIC for", default=10)
   parser.add_argument("--M", type=int, help="Normalizing factor used in distance calculations", default=10)
 
   args = parser.parse_args()
 
   # Saves CLI arguments
   num_superpixels = args.num_superpixels
+  num_iterations = args.num_iterations
   M = args.M
   img_path = args.image_path
 
@@ -46,7 +48,6 @@ if __name__ == "__main__":
   num_rows_output = np.int32(numBlocks)
   num_cols_output = np.int32(num_superpixels * 6)
   S = int(math.sqrt(N /num_superpixels))
-  print(image_height, image_width)
 
   # Gets the initial cluster center
   clusters = initialize_cluster_centers_np(num_superpixels, image_height, image_width)
@@ -124,7 +125,7 @@ if __name__ == "__main__":
   size_smem = 2 * size_cluster_array
 
   # Performs the SLIC algo iterations 10 times
-  for i in range(10):
+  for i in range(num_iterations):
     assign_cluster_fn(d_l, d_a, d_b, d_cluster, d_label, d_output,
             np.int32(image_width), np.int32(image_height), np.int32(num_superpixels), np.int32(M), np.int32(S),
             block=(threadsPerBlock, 1, 1),
