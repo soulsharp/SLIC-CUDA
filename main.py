@@ -158,7 +158,5 @@ if __name__ == "__main__":
   save_path = os.path.join(os.getcwd(), "results", "slic_outputs", suffix)
 
   # Ensures the directory exists
-  print(save_path)
   os.makedirs(os.path.dirname(save_path), exist_ok=True)
-  print(save_path)
   lab2rgb(save_path, lab_img)

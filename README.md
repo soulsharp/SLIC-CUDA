@@ -60,19 +60,19 @@ This implementaion, on a Tesla T4 GPU, takes less on an average of around 0.15 s
 Here are a couple of results:
 
 ### Original Images: 
-![Monkey on a Ledge Original](results/images/manas-manikoth-t3BPY1BCAAc-unsplash.jpg)  
+![Monkey on a Ledge Original](results/images/manas-manikoth-t3BPY1BCAAc-unsplash_resized.jpg)  
 
 Photo by <a href="https://unsplash.com/@manasmanikoth?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Manas Manikoth</a> on <a href="https://unsplash.com/photos/a-monkey-sitting-on-a-ledge-t3BPY1BCAAc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
       
-![Scenery Original](results/images/philipp-neumann-DHijgFy-OkI-unsplash.jpg)
+![Scenery Original](results/images/philipp-neumann-DHijgFy-OkI-unsplash_resized.jpg)
 
  Photo by <a href="https://unsplash.com/@philneumn?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Philipp Neumann</a> on <a href="https://unsplash.com/photos/green-trees-near-lake-under-white-clouds-and-blue-sky-during-daytime-DHijgFy-OkI?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
       
       
 ### Artistic Outputs:
-![Monkey on a Ledge Artistic](results/slic_outputs/SLIC_Output_manas-manikoth-t3BPY1BCAAc-unsplash.jpg)
+![Monkey on a Ledge Artistic](results/slic_outputs/SLIC_Output_manas-manikoth-t3BPY1BCAAc-unsplash_resized.jpg)
 
-![Scenery Artistic](results/slic_outputs/SLIC_Output_philipp-neumann-DHijgFy-OkI-unsplash.jpg)
+![Scenery Artistic](results/slic_outputs/SLIC_Output_philipp-neumann-DHijgFy-OkI-unsplash_resized.jpg)
 
 ## Contributing
 
