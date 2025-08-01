@@ -2,6 +2,12 @@ import math
 from skimage import io, color
 from skimage.transform import resize
 import numpy as np
+import argparse
+import os
+
+import pycuda.driver as cuda
+import pycuda.autoinit
+from pycuda.compiler import SourceModule
 
 
 def initialize_cluster_centers_np(k, img_h, img_w):
@@ -32,7 +38,7 @@ def initialize_cluster_centers_np(k, img_h, img_w):
   return superpixel_indices
 
 
-# calculates gradient considering all three color channels
+# Calculates gradient considering all three color channels
 def calc_gradient_map(img, img_h, img_w):
   grad_map = np.zeros((img_h , img_w), dtype=np.float32)
   for i in range(3):
@@ -64,8 +70,39 @@ def reassign_cluster_center_acc_to_grad_np(clusters, grad_map):
   return y_indices, x_indices
 
 
-# function to convert LAB images back to RGB and save it
+# Function to convert LAB images back to RGB and save it
 def lab2rgb(path, lab_arr):
     rgb_arr = color.lab2rgb(lab_arr)
     rgb_arr = (rgb_arr * 255).astype(np.uint8)
     io.imsave(path, rgb_arr)
+
+def parse_arguments():
+    """Parses command-line arguments."""
+    parser = argparse.ArgumentParser()
+
+    # Please put input images in the results/images dir
+    parser.add_argument("--image_path", type=str, help="Path of the image to be SLIC-ed")
+    
+    # Number of superpixels, number of iterations and normalizing factor to be used in the image
+    parser.add_argument("--num_superpixels", type=int, help="Number of superpixels in the image", default=150)
+    parser.add_argument("--num_iterations", type=int, help="Number of iterations to run SLIC for", default=10)
+    parser.add_argument("--M", type=int, help="Normalizing factor used in distance calculations", default=10)
+
+    return parser.parse_args()
+
+
+def get_cuda_kernels():
+    """Reads the CUDA kernels from the source file and compiles it"""
+    kernel_path = os.path.join(
+        os.getcwd(),"kernels", "slic_kernels.cu")
+    
+    with open(kernel_path, "r") as f:
+        kernels = f.read()
+    ker = SourceModule(kernels)
+
+    return {
+      "assign_cluster_fn" : ker.get_function("assignClusterCenters"),
+      "update_cluster_fn" : ker.get_function("fusedMultiVectorSumAndAverage"),
+      "average_color_fn" : ker.get_function("averageColorCluster"),
+}
+
