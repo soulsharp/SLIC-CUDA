@@ -57,22 +57,31 @@ A workaround in the future could be to use global memory instead of shared memor
 The base CPU-implementation mentioned earlier takes on an average of around 2 minutes(varies based on the image size) on colab's server grade CPUs. 
 This implementaion, on a Tesla T4 GPU, takes less on an average of around 0.15 seconds to complete, achieving a massive speedup of the order of 1000x while maintaining functional correctness. The times in both the CPU and GPU implementations are only for the core algorithm and doesnt account for any pre-processing/ loading images/ allocating space on the GPU(It takes around 1.5 seconds for all this on a GPU).
 
-Here are a couple of results:
+Here are a couple of comparisons between the original image and its stylized counterpart created using the SLIC algorithm:
 
-### Original Images: 
-![Monkey on a Ledge Original](results/images/manas-manikoth-t3BPY1BCAAc-unsplash_resized.jpg)  
+<!-- markdownlint-disable MD033 -->
 
-Photo by <a href="https://unsplash.com/@manasmanikoth?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Manas Manikoth</a> on <a href="https://unsplash.com/photos/a-monkey-sitting-on-a-ledge-t3BPY1BCAAc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-      
-![Scenery Original](results/images/philipp-neumann-DHijgFy-OkI-unsplash_resized.jpg)
+<p align="center">
+  <img src="results/images/manas-manikoth-t3BPY1BCAAc-unsplash_resized.jpg" alt="Resized by CUDA" width="45%" />
+  <img src="results/slic_outputs/SLIC_Output_manas-manikoth-t3BPY1BCAAc-unsplash_resized.jpg" alt="Resized by OpenCV" width="45%" />
+</p>
+<p align="center">
+  <em>Left: Original image &nbsp;|&nbsp; Right: Created using SLIC (cv2.resize)</em>
+</p>
 
- Photo by <a href="https://unsplash.com/@philneumn?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Philipp Neumann</a> on <a href="https://unsplash.com/photos/green-trees-near-lake-under-white-clouds-and-blue-sky-during-daytime-DHijgFy-OkI?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-      
-      
-### Artistic Outputs:
-![Monkey on a Ledge Artistic](results/slic_outputs/SLIC_Output_manas-manikoth-t3BPY1BCAAc-unsplash_resized.jpg)
+<!-- markdownlint-disable MD033 -->
 
-![Scenery Artistic](results/slic_outputs/SLIC_Output_philipp-neumann-DHijgFy-OkI-unsplash_resized.jpg)
+<!-- markdownlint-disable MD033 -->
+
+<p align="center">
+  <img src="results/images/philipp-neumann-DHijgFy-OkI-unsplash_resized.jpg" alt="Resized by CUDA" width="45%" />
+  <img src="results/slic_outputs/SLIC_Output_philipp-neumann-DHijgFy-OkI-unsplash_resized.jpg" alt="Resized by OpenCV" width="45%" />
+</p>
+<p align="center">
+  <em>Left: Original image &nbsp;|&nbsp; Right: Created using SLIC (cv2.resize)</em>
+</p>
+
+<!-- markdownlint-disable MD033 -->
 
 ## Contributing
 
